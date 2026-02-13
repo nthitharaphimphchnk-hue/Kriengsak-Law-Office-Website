@@ -1,116 +1,154 @@
 /**
- * SEO Utilities for managing meta tags dynamically
+ * SEO utilities: meta tags, canonical, Open Graph, Twitter, robots.
+ * Uses VITE_SITE_URL for canonical/base; production index,follow; preview noindex when applicable.
  */
 
-interface SEOMetaTags {
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE_TEMPLATE,
+  SITE_NAME,
+} from "./seo-constants";
+
+const getBaseUrl = (): string => {
+  if (typeof window !== "undefined") return window.location.origin;
+  const env = (import.meta as unknown as { env?: Record<string, string> }).env;
+  const url = env?.VITE_SITE_URL;
+  if (url) return url.replace(/\/$/, "");
+  return "https://kriengsaklaw.manus.space";
+};
+
+/** Whether current env is preview/non-production (noindex if true). */
+const isPreviewEnv = (): boolean => {
+  const env = (import.meta as unknown as { env?: Record<string, string> }).env;
+  const mode = env?.MODE;
+  return mode === "preview" || mode === "staging" || false;
+};
+
+export interface SEOMetaTags {
   title: string;
-  description: string;
+  description?: string;
   image?: string;
   url?: string;
   type?: string;
+  /** Override robots (default: index,follow in production; noindex in preview). */
+  robots?: string;
 }
 
 /**
- * Update document meta tags for SEO and social sharing
+ * Build full page title from template.
+ */
+export function pageTitle(pagePart: string): string {
+  if (!pagePart) return SITE_NAME;
+  return DEFAULT_TITLE_TEMPLATE.replace("{Page}", pagePart);
+}
+
+/**
+ * Update document meta tags for SEO and social sharing.
  */
 export function updateMetaTags(seo: SEOMetaTags) {
-  const {
-    title,
-    description,
-    image = "https://kriengsaklaw.manus.space/logo.jpg",
-    url = typeof window !== "undefined" ? window.location.href : "https://kriengsaklaw.manus.space",
-    type = "website",
-  } = seo;
+  const baseUrl = getBaseUrl();
+  const fullUrl = seo.url || (typeof window !== "undefined" ? window.location.href : baseUrl);
+  const title = seo.title || SITE_NAME;
+  const description = seo.description ?? DEFAULT_DESCRIPTION;
+  const image = seo.image ?? `${baseUrl}/og.jpg`;
+  const type = seo.type ?? "website";
+  const robots = seo.robots ?? (isPreviewEnv() ? "noindex, nofollow" : "index, follow");
 
-  // Update title
   document.title = title;
 
-  // Update or create meta tags
   updateMetaTag("description", description);
+  updateMetaTag("robots", robots);
+
+  updateMetaTag("og:site_name", SITE_NAME, "property");
   updateMetaTag("og:title", title, "property");
   updateMetaTag("og:description", description, "property");
-  updateMetaTag("og:image", image, "property");
-  updateMetaTag("og:url", url, "property");
   updateMetaTag("og:type", type, "property");
+  updateMetaTag("og:url", fullUrl, "property");
+  updateMetaTag("og:image", image, "property");
+
+  updateMetaTag("twitter:card", "summary_large_image");
   updateMetaTag("twitter:title", title);
   updateMetaTag("twitter:description", description);
   updateMetaTag("twitter:image", image);
 
-  // Update canonical URL
-  updateCanonicalUrl(url);
+  updateCanonicalUrl(fullUrl);
 }
 
-/**
- * Update or create a single meta tag
- */
 function updateMetaTag(
   name: string,
   content: string,
   type: "name" | "property" = "name"
 ) {
-  let element = document.querySelector(`meta[${type}="${name}"]`);
-
-  if (!element) {
-    element = document.createElement("meta");
-    element.setAttribute(type, name);
-    document.head.appendChild(element);
+  let el = document.querySelector(`meta[${type}="${name}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(type, name);
+    document.head.appendChild(el);
   }
-
-  element.setAttribute("content", content);
+  el.setAttribute("content", content);
 }
 
-/**
- * Update canonical URL
- */
 function updateCanonicalUrl(url: string) {
   let link = document.querySelector("link[rel='canonical']");
-
   if (!link) {
     link = document.createElement("link");
     link.setAttribute("rel", "canonical");
     document.head.appendChild(link);
   }
-
   link.setAttribute("href", url);
 }
 
+export { getBaseUrl };
+
 /**
- * SEO metadata for different pages
+ * Page metadata for each route (safe Thai, educational only).
  */
 export const pageMetadata = {
   home: {
-    title: "สำนักงานกฎหมายและบัญชี - ดร.เกรียงศักดิ์ พินทุสรศรี",
-    description:
-      "สำนักงานกฎหมายและบัญชีสำหรับบุคคลและธุรกิจ บริการว่าความคดีแพ่งและอาญา ที่ปรึกษากฎหมาย บัญชี ภาษี มรดก โดยทีมมืออาชีพ",
+    title: pageTitle("หน้าแรก"),
+    description: DEFAULT_DESCRIPTION,
   },
   services: {
-    title: "บริการ - สำนักงานกฎหมายและบัญชี",
+    title: pageTitle("บริการ"),
     description:
-      "บริการด้านกฎหมายและบัญชี ว่าความคดีแพ่งและอาญา ที่ปรึกษากฎหมาย ร่างสัญญา บัญชี ภาษี มรดก และอื่นๆ",
+      "บริการด้านกฎหมายและบัญชีในเชิงข้อมูลทั่วไป รับทำบัญชี ตรวจสอบ/ทบทวนบัญชี และบริการด้านกฎหมาย สำหรับบุคคลและธุรกิจ",
+  },
+  servicesAccounting: {
+    title: pageTitle("บริการรับทำบัญชี"),
+    description:
+      "บริการรับทำบัญชีรายเดือน (ข้อมูลทั่วไป) สำหรับบุคคลและธุรกิจ ทำงานเป็นระบบ โปร่งใส ตรวจสอบได้",
+  },
+  servicesAudit: {
+    title: pageTitle("บริการตรวจสอบ/ทบทวนบัญชี"),
+    description:
+      "บริการตรวจสอบ/ทบทวนเอกสารบัญชี (ข้อมูลทั่วไป) โดยผู้มีความรู้ความสามารถที่เกี่ยวข้อง",
+  },
+  servicesLegal: {
+    title: pageTitle("บริการด้านกฎหมาย"),
+    description:
+      "บริการด้านกฎหมาย (ข้อมูลทั่วไป) ว่าความ ที่ปรึกษา ร่างสัญญา และงานด้านกฎหมายอื่นๆ สำหรับบุคคลและธุรกิจ",
   },
   about: {
-    title: "เกี่ยวกับเรา - สำนักงานกฎหมายและบัญชี",
+    title: pageTitle("เกี่ยวกับเรา"),
     description:
-      "ดร.เกรียงศักดิ์ พินทุสรศรี ผู้ก่อตั้งสำนักงานกฎหมายและบัญชี มีประสบการณ์กว่า 20 ปีในการให้บริการทางกฎหมายและบัญชี",
+      "เกี่ยวกับสำนักงานกฎหมายและบัญชี ดร.เกรียงศักดิ์ ทำงานเป็นระบบ โปร่งใส ตรวจสอบได้",
   },
   knowledge: {
-    title: "บทความและสาระน่ารู้ - สำนักงานกฎหมายและบัญชี",
+    title: pageTitle("บทความและสาระน่ารู้"),
     description:
-      "บทความด้านกฎหมายและบัญชีที่น่าสนใจ เพื่อเป็นแนวทางและความรู้เบื้องต้นสำหรับประชาชนและผู้ประกอบการ",
+      "บทความด้านกฎหมายและบัญชีเพื่อการให้ความรู้ทั่วไป ไม่ถือเป็นคำปรึกษาเฉพาะราย",
   },
   contact: {
-    title: "ติดต่อเรา - สำนักงานกฎหมายและบัญชี",
+    title: pageTitle("ติดต่อเรา"),
     description:
-      "ติดต่อสำนักงานกฎหมายและบัญชี ดร.เกรียงศักดิ์ พินทุสรศรี โทร 081-611-6174 LINE 0888137777 อีเมล info@kriengsaklaw.com",
+      "ติดต่อสำนักงานกฎหมายและบัญชี ดร.เกรียงศักดิ์ ผ่านโทรศัพท์ LINE หรือแบบฟอร์ม",
   },
   faq: {
-    title: "คำถามที่พบบ่อย - สำนักงานกฎหมายและบัญชี",
-    description:
-      "คำถามที่พบบ่อยเกี่ยวกับบริการกฎหมายและบัญชี ค่าบริการ ระยะเวลา เอกสาร และอื่นๆ",
+    title: pageTitle("คำถามที่พบบ่อย"),
+    description: "คำถามที่พบบ่อยเกี่ยวกับบริการและขั้นตอนการติดต่อ",
   },
   testimonials: {
-    title: "ความคิดเห็นจากลูกค้า - สำนักงานกฎหมายและบัญชี",
-    description:
-      "ความคิดเห็นและประสบการณ์จากลูกค้าที่พึงพอใจกับบริการของสำนักงานกฎหมายและบัญชี",
+    title: pageTitle("ความคิดเห็นจากลูกค้า"),
+    description: "ความคิดเห็นจากลูกค้าที่ใช้บริการ",
   },
 };

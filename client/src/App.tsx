@@ -3,17 +3,19 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { JsonLd } from "./components/JsonLd";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import { usePageTracking } from "./hooks/usePageTracking";
 import Services from "./pages/Services";
+import ServiceAccounting from "./pages/ServiceAccounting";
+import ServiceAudit from "./pages/ServiceAudit";
+import ServiceLegal from "./pages/ServiceLegal";
 import About from "./pages/About";
 import Knowledge from "./pages/Knowledge";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Testimonials from "./pages/Testimonials";
-// Admin disabled for static site (no backend DB/JWT)
-// import AdminDashboard from "./pages/AdminDashboard";
 
 function Router() {
   // Track page views with Google Analytics and Umami
@@ -23,15 +25,16 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/services"} component={Services} />
+      <Route path={"/services/accounting"} component={ServiceAccounting} />
+      <Route path={"/services/audit"} component={ServiceAudit} />
+      <Route path={"/services/legal"} component={ServiceLegal} />
       <Route path={"/about"} component={About} />
       <Route path={"/knowledge"} component={Knowledge} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/testimonials"} component={Testimonials} />
-      {/* /admin disabled – static site */}
       <Route path={"/admin"} component={NotFound} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
@@ -45,12 +48,10 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
+          <JsonLd />
           <Router />
         </TooltipProvider>
       </ThemeProvider>

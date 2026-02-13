@@ -1,10 +1,23 @@
+import { useEffect } from "react";
+import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, Scale, FileText, Home, Users, BarChart3, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Briefcase, Scale, FileText, Home, Users, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
+
+const SERVICE_CATEGORIES = [
+  { slug: "accounting", title: "รับทำบัญชี", description: "บริการรับทำบัญชีรายเดือน (ข้อมูลทั่วไป)", href: "/services/accounting", icon: BarChart3 },
+  { slug: "audit", title: "ตรวจสอบ/ทบทวนบัญชี", description: "บริการตรวจสอบ/ทบทวนเอกสารบัญชี (ข้อมูลทั่วไป)", href: "/services/audit", icon: FileText },
+  { slug: "legal", title: "ด้านกฎหมาย", description: "บริการด้านกฎหมาย (ข้อมูลทั่วไป)", href: "/services/legal", icon: Scale },
+] as const;
 
 export default function Services() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.services);
+  }, []);
   const legalServices = [
     {
       icon: Scale,
@@ -61,12 +74,46 @@ export default function Services() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
-          <div className="container">
+        <section className="relative min-h-[420px] md:min-h-[480px] flex items-center text-primary-foreground bg-cover bg-center bg-no-repeat bg-[url('/hero-sign-1920x800.jpg')]">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-transparent" />
+          <div className="container relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">บริการของเรา</h1>
             <p className="text-lg opacity-90 max-w-2xl">
               สำนักงานของเราให้บริการด้านกฎหมายและบัญชีอย่างครบวงจร ทั้งสำหรับลูกค้าบุคคลและนิติบุคคล
             </p>
+          </div>
+        </section>
+
+        {/* Service categories – internal links to detail pages */}
+        <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container">
+            <h2 className="text-2xl font-bold mb-6">หมวดบริการหลัก</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {SERVICE_CATEGORIES.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <Card key={cat.slug} className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Icon className="h-6 w-6 text-primary" />
+                        <CardTitle className="text-primary">{cat.title}</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm mb-4">{cat.description}</p>
+                      <Link href={cat.href}>
+                        <a>
+                          <Button variant="outline" size="sm">
+                            รายละเอียด
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </a>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </section>
 

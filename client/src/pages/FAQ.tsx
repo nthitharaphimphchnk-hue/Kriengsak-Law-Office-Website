@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
 export default function FAQ() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.faq);
+  }, []);
   const faqs = [
     {
       id: "faq-1",

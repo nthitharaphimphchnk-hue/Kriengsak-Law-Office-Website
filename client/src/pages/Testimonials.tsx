@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
 export default function Testimonials() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.testimonials);
+  }, []);
   const testimonials = [
     {
       id: 1,

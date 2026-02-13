@@ -1,16 +1,23 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Award, Users, Target } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
 export default function About() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.about);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
-          <div className="container">
+        <section className="relative text-primary-foreground py-16 md:py-24 bg-cover bg-center bg-no-repeat bg-[url('/about-hero.png')]">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-transparent" />
+          <div className="container relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">เกี่ยวกับเรา</h1>
             <p className="text-lg opacity-90 max-w-2xl">
               บริษัท ดร.เกรียงศักดิ์และเพื่อนทนายความการบัญชี จำกัด

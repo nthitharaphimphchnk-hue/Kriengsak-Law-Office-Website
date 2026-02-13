@@ -246,8 +246,8 @@ export default function Home() {
           <div className="container text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               พร้อมให้คำปรึกษาและบริการคุณแล้ววันนี้
-            </h2>          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              ติดต่อเราผ่านช่องทางที่สะดวกของคุณ เราพร้อมให้คำปรึกษาฟรีสำหรับการประเมินเบื้องต้น
+            </h2>                      <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              ติดต่อเราผ่านช่องทางที่สะดวกของคุณ เราพร้อมรับฟังและประเมินข้อมูลเบื้องต้น
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">

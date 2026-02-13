@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Phone, MapPin, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
+import { DISCLAIMER_TEXT } from "@/lib/seo-constants";
 
 const PHONE_PRIMARY = "0816116174";
 const PHONE_OFFICE_1 = "027540992";
@@ -12,6 +18,10 @@ const GOOGLE_MAP_URL =
   "https://www.google.com/maps/search/?api=1&query=199+หมู่+9+ถนนแบริ่ง+107+สำโรงเหนือ+เมืองสมุทรปราการ+สมุทรปราการ+10270";
 
 export default function Contact() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.contact);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -21,13 +31,23 @@ export default function Contact() {
           <div className="container">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">ติดต่อเรา</h1>
             <p className="text-lg opacity-90 max-w-2xl">
-              เราพร้อมให้คำปรึกษาและดูแลคุณในทุกปัญหาด้านกฎหมายและบัญชี
+              เราพร้อมรับฟังและประเมินข้อมูลเบื้องต้นของคุณ
               กดโทรหรือกด LINE ได้เลย
             </p>
           </div>
         </section>
 
-        {/* CTA Buttons – โทร / LINE / แผนที่ (Static – ไม่มีฟอร์ม ไม่เก็บข้อมูล) */}
+        {/* Disclaimer above contact content (site-wide requirement) */}
+        <section className="py-8 bg-white">
+          <div className="container max-w-2xl">
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-md text-sm text-amber-900">
+              <p className="font-medium mb-1">ข้อสงวนสิทธิ์</p>
+              <p>{DISCLAIMER_TEXT}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Buttons – โทร / LINE / แผนที่ */}
         <section className="py-16 md:py-24 bg-muted/30">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -98,16 +118,33 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* ข้อความสงวนสิทธิ์ */}
-        <section className="py-8 bg-white">
-          <div className="container max-w-2xl">
-            <div className="p-4 bg-muted/50 rounded-md text-sm text-muted-foreground">
-              <p className="font-medium mb-2">ข้อสงวนสิทธิ์:</p>
-              <p>
-                ข้อมูลบนเว็บไซต์นี้จัดทำขึ้นเพื่อการให้ความรู้ทั่วไป
-                ไม่ถือเป็นคำปรึกษากฎหมายหรือบัญชี/ภาษีเฉพาะราย
-              </p>
+        {/* Lead form skeleton – disclaimer above form */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container max-w-xl">
+            <div className="p-4 bg-muted/50 rounded-md text-sm text-muted-foreground mb-8">
+              <p className="font-medium mb-1">ข้อสงวนสิทธิ์</p>
+              <p>{DISCLAIMER_TEXT}</p>
             </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>ส่งข้อความ</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="contact-name">ชื่อ-นามสกุล</Label>
+                  <Input id="contact-name" placeholder="ชื่อ-นามสกุล" className="mt-1" />
+                </div>
+                <div>
+                  <Label htmlFor="contact-email">อีเมล</Label>
+                  <Input id="contact-email" type="email" placeholder="อีเมล" className="mt-1" />
+                </div>
+                <div>
+                  <Label htmlFor="contact-message">ข้อความ</Label>
+                  <Textarea id="contact-message" placeholder="รายละเอียดที่ต้องการติดต่อ" className="mt-1 min-h-[120px]" />
+                </div>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">ส่งข้อความ</Button>
+              </CardContent>
+            </Card>
           </div>
         </section>
       </main>

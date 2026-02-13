@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Tag } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
 export default function Knowledge() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.knowledge);
+  }, []);
+
   const articles = [
     {
       id: 1,

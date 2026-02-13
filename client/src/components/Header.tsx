@@ -23,7 +23,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/">
           <a className="flex items-center gap-3 font-bold text-primary hover:opacity-80 transition-opacity">
-            <img src="/logo.jpg" alt="Logo" className="h-10 w-10 rounded-full object-cover" />
+            <img src="/logo.jpg" alt="Logo" className="h-10 w-10 rounded-full object-cover" width={40} height={40} />
             <span className="hidden sm:inline text-sm">ดร.เกรียงศักดิ์</span>
           </a>
         </Link>

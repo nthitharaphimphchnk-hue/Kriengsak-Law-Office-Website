@@ -119,10 +119,10 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Noto Sans Thai', sans-serif;
+    font-family: 'Sarabun', 'TH Sarabun', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', 'Noto Sans Thai', serif;
+    font-family: 'Sarabun', 'TH Sarabun', sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }

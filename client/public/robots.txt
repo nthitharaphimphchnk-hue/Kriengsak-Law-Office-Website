@@ -3,11 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-# Sitemaps
 Sitemap: https://kriengsaklaw.manus.space/sitemap.xml
-
-# Crawl delay
-Crawl-delay: 1
-
-# Request rate
-Request-rate: 1/1s
