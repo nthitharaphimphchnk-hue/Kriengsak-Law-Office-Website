@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative text-primary-foreground py-20 md:py-32 bg-cover bg-center" style={{ backgroundImage: 'url(/hero-bg.jpg)', minHeight: '400px' }}>
+        <section className="relative text-primary-foreground py-20 md:py-32 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/home-hero-bg.png)', minHeight: '400px' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent"></div>
           <div className="container relative z-10">
             <div className="max-w-2xl">
