@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Tag } from "lucide-react";
 import Header from "@/components/Header";
@@ -10,28 +10,41 @@ export default function Knowledge() {
   useEffect(() => {
     updateMetaTags(pageMetadata.knowledge);
   }, []);
+  const [playingVideoByArticleId, setPlayingVideoByArticleId] = useState<Record<number, boolean>>({});
 
-  const articles = [
+  type Article = {
+    id: number;
+    title: string;
+    date: string;
+    category: string;
+    excerpt: string;
+    videoId?: string;
+  };
+
+  const articles: Article[] = [
     {
       id: 1,
-      title: "การจดทะเบียนบริษัทต้องทำอย่างไร?",
+      title: "คดีรับสภาพหนี้ ทนายความไขคดีปรึกษากฎหมายฟรี14/06/2019 ถามตอบกฎหมายข่าว ทนาย ดร.เกรียงศักดิ์",
       date: "12 กุมภาพันธ์ 2569",
       category: "บัญชีและภาษี",
       excerpt: "สรุปขั้นตอนและเอกสารที่ต้องใช้ในการจดทะเบียนจัดตั้งบริษัทจำกัด พร้อมข้อควรระวังสำหรับผู้เริ่มต้น",
+      videoId: "KOm6QCApIJU",
     },
     {
       id: 2,
-      title: "สัญญาเงินกู้ยืมที่ถูกต้องตามกฎหมาย",
+      title: "คดีต้มสาวซื้อรถยนต์1 05 2564 ถามตอบกฎหมายข่าว คุยสบายสไตล์ทนายเกรียงศักดิ์ 0816116174 1",
       date: "10 กุมภาพันธ์ 2569",
       category: "กฎหมายแพ่ง",
       excerpt: "องค์ประกอบสำคัญที่ต้องมีในสัญญาเงินกู้ยืม เพื่อให้สามารถใช้ฟ้องร้องบังคับคดีได้ตามกฎหมาย",
+      videoId: "WHIDtinQRUk",
     },
     {
       id: 3,
-      title: "รู้หรือไม่? มรดกที่ไม่มีพินัยกรรมจะตกเป็นของใคร",
+      title: "ร้องนักการเมือง ยักยอกรถหรู 2 คัน มูลค่ากว่า 10 ล้าน",
       date: "8 กุมภาพันธ์ 2569",
       category: "กฎหมายครอบครัว",
       excerpt: "ลำดับทายาทโดยธรรมที่มีสิทธิรับมรดก กรณีที่เจ้ามรดกเสียชีวิตโดยไม่ได้ทำพินัยกรรมไว้",
+      videoId: "94TxIG9hDE0",
     },
   ];
 
@@ -40,8 +53,9 @@ export default function Knowledge() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
-          <div className="container">
+        <section className="relative text-primary-foreground py-16 md:py-24 bg-cover bg-center bg-no-repeat bg-[url('/knowledge-hero-banner.png')]">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-transparent" />
+          <div className="container relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">บทความและสาระน่ารู้</h1>
             <p className="text-lg opacity-90 max-w-2xl">
               รวบรวมบทความด้านกฎหมายและบัญชีที่น่าสนใจ เพื่อเป็นแนวทางและความรู้เบื้องต้นสำหรับประชาชนและผู้ประกอบการ
@@ -73,6 +87,45 @@ export default function Knowledge() {
                     </div>
                   </CardHeader>
                   <CardContent>
+                    {article.videoId && (
+                      <div className="mb-4 rounded-xl overflow-hidden border border-black/10 shadow-sm aspect-video bg-black">
+                        {playingVideoByArticleId[article.id] ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${article.videoId}?autoplay=1&rel=0`}
+                            title={`YouTube: ${article.title}`}
+                            loading="lazy"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            className="w-full h-full"
+                          />
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPlayingVideoByArticleId((prev) => ({ ...prev, [article.id]: true }))
+                            }
+                            className="relative w-full h-full block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                            aria-label={`เล่นวิดีโอ: ${article.title}`}
+                          >
+                            <img
+                              src={`https://i.ytimg.com/vi/${article.videoId}/hqdefault.jpg`}
+                              alt={`ภาพปกวิดีโอ ${article.title}`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                            <span className="absolute inset-0 bg-black/30" />
+                            <span className="absolute inset-0 flex items-center justify-center">
+                              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-red-600/95 shadow-lg">
+                                <svg viewBox="0 0 24 24" className="h-7 w-7 fill-white ml-0.5" aria-hidden="true">
+                                  <path d="M8 5v14l11-7z" />
+                                </svg>
+                              </span>
+                            </span>
+                          </button>
+                        )}
+                      </div>
+                    )}
                     <p className="text-muted-foreground mb-4">{article.excerpt}</p>
                     <div className="flex items-center justify-between pt-4 border-t border-border">
                       <button className="text-primary font-semibold hover:underline text-sm">

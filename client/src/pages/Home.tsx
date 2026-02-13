@@ -5,12 +5,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, MessageCircle, Phone, CheckCircle2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import YouTubeSection from "@/components/YouTubeSection";
 import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
 export default function Home() {
   useEffect(() => {
     updateMetaTags(pageMetadata.home);
   }, []);
+
+  const youtube = {
+    channelName: "ผศ.ดร.เกรียงศักดิ์ พินทุสรรค์",
+    channelUrl: "https://www.youtube.com/",
+    videos: [
+      { title: "คลิปหลัก", videoId: "dQw4w9WgXcQ" },
+      { title: "คลิปรอง 1", videoId: "dQw4w9WgXcQ" },
+      { title: "คลิปรอง 2", videoId: "dQw4w9WgXcQ" },
+    ],
+  };
 
   return (    <div className="min-h-screen flex flex-col">
       <Header />
@@ -183,6 +194,12 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <YouTubeSection
+          channelName={youtube.channelName}
+          channelUrl={youtube.channelUrl}
+          videos={youtube.videos}
+        />
 
         {/* Testimonials Preview */}
         <section className="py-16 md:py-24 bg-muted/30">
