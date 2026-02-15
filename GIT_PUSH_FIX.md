@@ -1,6 +1,6 @@
 # วิธี Push ขึ้น GitHub (แก้ 403 Permission)
 
-Repo: `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.git`
+Repo: `https://github.com/bulebananaofficial-del/kriengsak-law-office-websitexxxxxxxxxxxxxxxxxxxx.git`
 
 ---
 
@@ -9,7 +9,7 @@ Repo: `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.gi
 เพิ่มผู้ใช้ **nthitharaphimphchnk-hue** เป็น Collaborator สิทธิ์ **Write**
 
 1. ล็อกอิน GitHub ด้วยบัญชี **bulebananaofficial-del**
-2. ไปที่ repo นี้ → **Settings** → **Collaborators** (หรือ [settings/access](https://github.com/bulebananaofficial-del/kriengsak-law-office-website/settings/access))
+2. ไปที่ repo นี้ → **Settings** → **Collaborators** (หรือ [settings/access](https://github.com/bulebananaofficial-del/kriengsak-law-office-websitexxxxxxxxxxxxxxxxxxxx/settings/access))
 3. คลิก **Add people**
 4. พิมพ์ **nthitharaphimphchnk-hue** → เลือกสิทธิ์ **Write** → Add
 5. บัญชีที่ถูกเพิ่ม: บนเครื่องตัวเองรัน:
@@ -45,5 +45,5 @@ Repo: `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.gi
 
 ## ตรวจสอบหลังตั้งค่า
 
-- `git remote -v` → ต้องมีแค่ `origin` → `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.git`
+- `git remote -v` → ต้องมีแค่ `origin` → `https://github.com/bulebananaofficial-del/kriengsak-law-office-websitexxxxxxxxxxxxxxxxxxxx.git`
 - Branch: `main` → push ด้วย `git push -u origin main`
