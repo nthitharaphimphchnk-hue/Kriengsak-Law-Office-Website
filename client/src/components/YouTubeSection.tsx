@@ -85,6 +85,43 @@ export default function YouTubeSection({
     );
   };
 
+  const renderVideoLinkCard = (video: YouTubeVideo) => {
+    const candidates = getThumbnailCandidates(video.videoId);
+    const currentIndex = thumbIndexByVideoId[video.videoId] ?? 0;
+    const thumbnailSrc = candidates[Math.min(currentIndex, candidates.length - 1)];
+
+    return (
+      <a
+        href={`https://youtu.be/${video.videoId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative w-full h-full block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        aria-label={`เปิดวิดีโอ YouTube: ${video.title}`}
+      >
+        <img
+          src={thumbnailSrc}
+          alt={`ภาพปกวิดีโอ ${video.title}`}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          onError={() => {
+            setThumbIndexByVideoId((prev) => ({
+              ...prev,
+              [video.videoId]: Math.min((prev[video.videoId] ?? 0) + 1, candidates.length - 1),
+            }));
+          }}
+        />
+        <span className="absolute inset-0 bg-black/30 pointer-events-none" />
+        <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-red-600/95 shadow-lg">
+            <svg viewBox="0 0 24 24" className="h-7 w-7 fill-white ml-0.5" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </span>
+      </a>
+    );
+  };
+
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container">
@@ -117,7 +154,7 @@ export default function YouTubeSection({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <article className="lg:col-span-2">
             <div className="rounded-2xl overflow-hidden shadow-lg border border-black/10 aspect-video bg-black">
-              {renderVideoCard(mainVideo)}
+              {renderVideoLinkCard(mainVideo)}
             </div>
           </article>
 
@@ -125,7 +162,7 @@ export default function YouTubeSection({
             {[secondVideo, thirdVideo].map((video) => (
               <article key={`${video.videoId}-${video.title}`}>
                 <div className="rounded-2xl overflow-hidden shadow-lg border border-black/10 aspect-video bg-black">
-                  {renderVideoCard(video)}
+                  {renderVideoLinkCard(video)}
                 </div>
               </article>
             ))}
