@@ -4,52 +4,46 @@ Repo: `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.gi
 
 ---
 
-## วิธี (a): เพิ่ม Collaborator
+## วิธี (a): เพิ่ม Collaborator (แนะนำ)
 
-เหมาะเมื่อมีหลายคนช่วย push หรือใช้บัญชีอื่น push บ่อย
+เพิ่มผู้ใช้ **nthitharaphimphchnk-hue** เป็น Collaborator สิทธิ์ **Write**
 
-1. เจ้าของ repo ล็อกอิน GitHub บัญชี **bulebananaofficial-del**
-2. ไปที่  
-   **https://github.com/bulebananaofficial-del/kriengsak-law-office-website/settings/access**
+1. ล็อกอิน GitHub ด้วยบัญชี **bulebananaofficial-del**
+2. ไปที่ repo นี้ → **Settings** → **Collaborators** (หรือ [settings/access](https://github.com/bulebananaofficial-del/kriengsak-law-office-website/settings/access))
 3. คลิก **Add people**
-4. พิมพ์ username GitHub ของคนที่จะ push (เช่น `nthitharaphimphchnk-hue`) แล้วกด Add
-5. คนที่ถูกเพิ่ม: บนเครื่องตัวเองล้าง credential เก่า (ถ้ามี) แล้วรัน:
+4. พิมพ์ **nthitharaphimphchnk-hue** → เลือกสิทธิ์ **Write** → Add
+5. บัญชีที่ถูกเพิ่ม: บนเครื่องตัวเองรัน:
    ```bash
    git push -u origin main
    ```
-   ถ้าถูกถามให้ sign in ให้ใช้บัญชีที่ถูกเพิ่มเป็น collaborator
+   ถ้าถูกถามให้ sign in ให้ใช้บัญชี **nthitharaphimphchnk-hue**
 
 ---
 
 ## วิธี (b): ใช้ Personal Access Token (PAT)
 
-เหมาะเมื่อ push ด้วยบัญชีเจ้าของ repo โดยไม่ล็อกอินผ่าน browser
+ใช้ PAT จากบัญชี **bulebananaofficial-del** (สิทธิ์ repo)
 
 1. ล็อกอิน GitHub บัญชี **bulebananaofficial-del**
-2. ไปที่ **https://github.com/settings/tokens**
-3. คลิก **Generate new token (classic)**
-4. ตั้งชื่อ (เช่น `kriengsaklaw-push`), เลือก Expiration, เลือก scope **repo**
-5. คลิก **Generate token**
-6. **คัดลอก token ทันที** (ขึ้นต้น `ghp_`) — หน้าเว็บจะแสดงแค่ครั้งเดียว
-7. บนเครื่อง ในโฟลเดอร์โปรเจกต์ รันแบบไม่เก็บ token ลงไฟล์:
-   - **PowerShell (ใช้ครั้งเดียว แล้ว token หายจากหน่วยความจำ):**
+2. ไปที่ **https://github.com/settings/tokens** → **Generate new token (classic)**
+3. ตั้งชื่อ, เลือก Expiration, เลือก scope **repo**
+4. Generate แล้ว **คัดลอก token ทันที** (ขึ้นต้น `ghp_`)
+5. เวลา push ใช้ PAT แทน password — **ห้ามวาง token ในไฟล์**
+   - ใช้ครั้งเดียวในเทอร์มินัล เช่น:
      ```powershell
-     $env:GITHUB_TOKEN = "วาง_token_ตรงนี้"; git push -u origin main
+     $env:GITHUB_TOKEN = "ghp_xxx"; git push -u origin main
      ```
-   - หรือใช้สคริปต์ `.\push.ps1` แล้ววาง token ตอนที่สคริปต์ถาม (สคริปต์ไม่บันทึก token ลงไฟล์)
+   - หรือรัน `.\push.ps1` แล้ววาง token ตอนที่สคริปต์ถาม
 
 ### ข้อควรระวังเรื่อง Token
 
-- **ห้าม** ใส่ token ลงในไฟล์ใน repo (เช่น `.env`, config, หรือไฟล์อื่น) เพราะจะถูก commit และรั่วบน GitHub
-- **ห้าม** แชร์ token ทางแชท อีเมล หรือที่สาธารณะ
-- ใช้ token แค่ใน session เดียว (เช่น ตั้งใน `$env:GITHUB_TOKEN` แล้ว push ทันที)
-- ถ้า token รั่ว ให้ไปที่ GitHub → Settings → Developer settings → Personal access tokens แล้ว **Revoke** token ตัวนั้นทันที แล้วสร้างใหม่
+- **ห้าม** วาง token ในโค้ด หรือไฟล์ใดๆ (เช่น `.env`, config) — จะถูก commit และรั่ว
+- **เก็บ token ใน password manager** ถ้าต้องใช้ซ้ำ อย่าเก็บใน repo หรือแชท
+- **ถ้า token รั่ว** ให้ไป GitHub → Settings → Developer settings → Personal access tokens → **Revoke** ทันที แล้วสร้างใหม่
 
 ---
 
 ## ตรวจสอบหลังตั้งค่า
 
-- ดู remote: `git remote -v`  
-  ต้องมีแค่ `origin` ชี้ไปที่  
-  `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.git`
-- Branch: ใช้ `main` และ push ด้วย `git push -u origin main`
+- `git remote -v` → ต้องมีแค่ `origin` → `https://github.com/bulebananaofficial-del/kriengsak-law-office-website.git`
+- Branch: `main` → push ด้วย `git push -u origin main`
