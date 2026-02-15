@@ -1,6 +1,6 @@
 # Push script - opens GitHub token page, you paste token, then pushes
 $ErrorActionPreference = "Stop"
-$remote = "https://github.com/bulebananaofficial-del/kriengsak-law-office-websitexxxxxxxxxxxxxxxxxxxx.git"
+$remote = "https://github.com/nthitharaphimphchnk-hue/Kriengsak-Law-Office-Website.git"
 $repoPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $repoPath
 
@@ -28,7 +28,7 @@ if (-not $token) {
 
 Write-Host ""
 Write-Host "Pushing to GitHub..." -ForegroundColor Green
-$urlWithToken = "https://x-access-token:$token@github.com/bulebananaofficial-del/kriengsak-law-office-websitexxxxxxxxxxxxxxxxxxxx.git"
+$urlWithToken = "https://x-access-token:$token@github.com/nthitharaphimphchnk-hue/Kriengsak-Law-Office-Website.git"
 git remote set-url origin $urlWithToken
 git push -u origin main
 $exitCode = $LASTEXITCODE
