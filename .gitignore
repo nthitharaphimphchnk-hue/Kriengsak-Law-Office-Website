@@ -102,6 +102,10 @@ jspm_packages/
 .out
 .storybook-out
 
+# Turbo / Vercel
+.turbo
+.vercel
+
 # Temporary folders
 tmp/
 temp/

@@ -15,11 +15,12 @@ export default function Home() {
 
   const youtube = {
     channelName: "ผศ.ดร.เกรียงศักดิ์ พินทุสรรค์",
-    channelUrl: "https://www.youtube.com/",
+    channelUrl:
+      "https://www.youtube.com/@%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B9%88%E0%B8%A7%E0%B8%A2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%88%E0%B8%B2%E0%B8%A3%E0%B8%A2%E0%B9%8C%E0%B8%94%E0%B8%A3.%E0%B9%80%E0%B8%81%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B8%A8%E0%B8%B1%E0%B8%81",
     videos: [
-      { title: "คลิปหลัก", videoId: "dQw4w9WgXcQ" },
-      { title: "คลิปรอง 1", videoId: "dQw4w9WgXcQ" },
-      { title: "คลิปรอง 2", videoId: "dQw4w9WgXcQ" },
+      { title: "ทนายความไขคดี 1", videoId: "KOm6QCApIJU" },
+      { title: "ทนายความไขคดี 2", videoId: "uB_7_syzhQM" },
+      { title: "ทนายความไขคดี 3", videoId: "7bV3eV6MRPo" },
     ],
   };
 
