@@ -36,6 +36,9 @@ const ROUTES = [
   { path: "/lawyer-chiangmai-fraud", changefreq: "monthly", priority: "0.8" },
   { path: "/lawyer-bangkok", changefreq: "monthly", priority: "0.9" },
   { path: "/lawyer-chiangmai-eviction", changefreq: "monthly", priority: "0.8" },
+  { path: "/divorce-lawyer-bangkok", changefreq: "monthly", priority: "0.8" },
+  { path: "/fraud-lawyer-bangkok", changefreq: "monthly", priority: "0.8" },
+  { path: "/eviction-lawyer-bangkok", changefreq: "monthly", priority: "0.8" },
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);

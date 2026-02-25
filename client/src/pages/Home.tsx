@@ -168,19 +168,49 @@ export default function Home() {
 
         {/* บริการหลักของเรา */}
         <section className="py-16 md:py-24 bg-muted/30">
-          <div className="container text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">บริการหลักของเรา</h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <div className="container">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">บริการหลักของเรา</h2>
+            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
               ทนายความกรุงเทพ ที่สำนักงานกฎหมายเกรียงศักดิ์ พร้อมให้คำปรึกษาและรับว่าความคดีแพ่ง อาญา ครอบครัว
             </p>
-            <Link href="/lawyer-bangkok">
-              <a>
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  ดูรายละเอียดทนายความกรุงเทพ
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
-            </Link>
+            <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 list-none">
+              <li>
+                <Link href="/lawyer-bangkok">
+                  <a>
+                    <Button variant="outline" className="w-full sm:w-auto">
+                      ทนายความกรุงเทพ
+                    </Button>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/divorce-lawyer-bangkok">
+                  <a>
+                    <Button variant="outline" className="w-full sm:w-auto">
+                      ฟ้องหย่ากรุงเทพ
+                    </Button>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/fraud-lawyer-bangkok">
+                  <a>
+                    <Button variant="outline" className="w-full sm:w-auto">
+                      คดีฉ้อโกงกรุงเทพ
+                    </Button>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/eviction-lawyer-bangkok">
+                  <a>
+                    <Button variant="outline" className="w-full sm:w-auto">
+                      ฟ้องขับไล่ผู้เช่า
+                    </Button>
+                  </a>
+                </Link>
+              </li>
+            </ul>
           </div>
         </section>
 

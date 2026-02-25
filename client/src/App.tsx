@@ -20,6 +20,9 @@ import LawyerChiangmaiDivorce from "./pages/LawyerChiangmaiDivorce";
 import LawyerChiangmaiFraud from "./pages/LawyerChiangmaiFraud";
 import LawyerChiangmaiEviction from "./pages/LawyerChiangmaiEviction";
 import LawyerBangkok from "./pages/LawyerBangkok";
+import DivorceLawyerBangkok from "./pages/DivorceLawyerBangkok";
+import FraudLawyerBangkok from "./pages/FraudLawyerBangkok";
+import EvictionLawyerBangkok from "./pages/EvictionLawyerBangkok";
 
 function Router() {
   // Track page views with Google Analytics and Umami
@@ -41,6 +44,9 @@ function Router() {
       <Route path={"/lawyer-chiangmai-fraud"} component={LawyerChiangmaiFraud} />
       <Route path={"/lawyer-chiangmai-eviction"} component={LawyerChiangmaiEviction} />
       <Route path={"/lawyer-bangkok"} component={LawyerBangkok} />
+      <Route path={"/divorce-lawyer-bangkok"} component={DivorceLawyerBangkok} />
+      <Route path={"/fraud-lawyer-bangkok"} component={FraudLawyerBangkok} />
+      <Route path={"/eviction-lawyer-bangkok"} component={EvictionLawyerBangkok} />
       <Route path={"/admin"} component={NotFound} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
