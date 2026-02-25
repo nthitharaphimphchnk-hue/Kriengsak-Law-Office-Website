@@ -2,15 +2,65 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArrowRight, MessageCircle, Phone, CheckCircle2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import YouTubeSection from "@/components/YouTubeSection";
 import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
+const homeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "ปรึกษาทนายต้องเตรียมอะไรบ้าง?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "ควรเตรียมเอกสารที่เกี่ยวข้อง เช่น สัญญา ใบเสร็จ หลักฐานการติดต่อ หรือข้อมูลเบื้องต้นเกี่ยวกับปัญหา รวมถึงรายละเอียดวันที่และเหตุการณ์สำคัญ สำหรับคดีแพ่งอาจต้องมีสัญญา หนังสือแจ้ง หรือหลักฐานการชำระเงิน",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "รับว่าความคดีอะไรบ้าง?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "รับว่าคดีแพ่ง คดีอาญา คดีครอบครัว รวมถึงคดีเกี่ยวกับสัญญา มรดก ฟ้องหย่า ฉ้อโกง การฟ้องขับไล่ผู้เช่า และคดีอื่นๆ ตามกฎหมาย ให้คำปรึกษาและประเมินแนวทางคดีได้ทันที",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "ค่าใช้จ่ายในการจ้างทนายคิดอย่างไร?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "ค่าจ้างขึ้นอยู่กับประเภทคดีและความซับซ้อน โดยทั่วไปคดีแพ่งเริ่มต้นประมาณ 15,000–50,000 บาท คดีอาญาหรือครอบครัวอาจสูงขึ้น สำนักงานให้คำปรึกษาเบื้องต้นฟรี เพื่อประเมินและเสนอราคาที่ชัดเจนตามขอบเขตงาน",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "ติดต่อเพื่อนัดหมายและรับคำปรึกษาได้อย่างไร?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "โทร 081-611-6174 หรือ LINE 0888137777 หรือมาที่สำนักงาน 1288–1291, 1702/8–9 ถนนสุขุมวิท ตำบลสำโรงเหนือ กรุงเทพฯ 10270 นัดปรึกษาเบื้องต้นได้ฟรี",
+      },
+    },
+  ],
+};
+
 export default function Home() {
   useEffect(() => {
     updateMetaTags(pageMetadata.home);
+
+    // STEP 2: ใส่ FAQ Schema ใน <head> สำหรับ AI/AEO
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "faq-schema-home";
+    script.textContent = JSON.stringify(homeFaqSchema);
+    document.head.appendChild(script);
+    return () => {
+      document.getElementById("faq-schema-home")?.remove();
+    };
   }, []);
 
   const youtube = {
@@ -24,7 +74,8 @@ export default function Home() {
     ],
   };
 
-  return (    <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
@@ -33,10 +84,13 @@ export default function Home() {
           <div className="container relative z-10">
             <div className="max-w-2xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                สำนักงานกฎหมายและบัญชีสำหรับบุคคลและธุรกิจ
+                ทนายความกรุงเทพ ให้คำปรึกษากฎหมายโดยตรง
               </h1>
-              <p className="text-lg md:text-xl opacity-90 mb-8">
-                ทำงานเป็นระบบ โปร่งใส ตรวจสอบได้
+              <p className="text-lg md:text-xl opacity-90 mb-4">
+                สำนักงานกฎหมายเกรียงศักดิ์ ให้บริการทนายความในกรุงเทพฯ (สำโรงเหนือ สุขุมวิท) รับว่าความคดีแพ่ง คดีอาญา คดีครอบครัว และให้คำปรึกษากฎหมายโดยตรงอย่างเป็นระบบ นัดหมายเพื่อประเมินแนวทางคดีและเอกสารที่ต้องใช้ได้ทันที
+              </p>
+              <p className="text-base md:text-lg opacity-90 mb-8">
+                ที่อยู่: 1288–1291, 1702/8–9 ถนนสุขุมวิท ตำบลสำโรงเหนือ กรุงเทพฯ 10270
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contact">
@@ -72,7 +126,7 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-white">
           <div className="container">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              ความไว้วางใจจากลูกค้า คือสิ่งที่เราให้ความสำคัญสูงสุด
+              ทนายความกรุงเทพ ที่ลูกค้าไว้วางใจ
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="border-l-4 border-l-primary">
@@ -112,12 +166,95 @@ export default function Home() {
           </div>
         </section>
 
+        {/* บริการหลักของเรา */}
+        <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">บริการหลักของเรา</h2>
+            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              ทนายความกรุงเทพ ที่สำนักงานกฎหมายเกรียงศักดิ์ พร้อมให้คำปรึกษาและรับว่าความคดีแพ่ง อาญา ครอบครัว
+            </p>
+            <Link href="/lawyer-bangkok">
+              <a>
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  ดูรายละเอียดทนายความกรุงเทพ
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </Link>
+          </div>
+        </section>
+
+        {/* FAQ Section - AEO */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              คำถามที่พบบ่อย
+            </h2>
+            <div className="max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="faq-1" className="border-b border-border">
+                  <AccordionTrigger className="hover:no-underline hover:text-primary py-4">
+                    <span className="text-left font-semibold text-foreground">ปรึกษาทนายต้องเตรียมอะไรบ้าง?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 space-y-3">
+                    <p className="font-medium text-foreground">
+                      ควรเตรียมเอกสารที่เกี่ยวข้อง เช่น สัญญา ใบเสร็จ หลักฐานการติดต่อ หรือข้อมูลเบื้องต้นเกี่ยวกับปัญหา รวมถึงรายละเอียดวันที่และเหตุการณ์สำคัญ
+                    </p>
+                    <p>
+                      สำหรับคดีแพ่งอาจต้องมีสัญญา หนังสือแจ้ง หรือหลักฐานการชำระเงิน สำหรับคดีอาญาหรือครอบครัว เอกสารบัตรประชาชน ทะเบียน และหลักฐานที่เกี่ยวข้องจะช่วยให้ทนายประเมินได้แม่นยำขึ้น
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="faq-2" className="border-b border-border">
+                  <AccordionTrigger className="hover:no-underline hover:text-primary py-4">
+                    <span className="text-left font-semibold text-foreground">รับว่าความคดีอะไรบ้าง?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 space-y-3">
+                    <p className="font-medium text-foreground">
+                      รับว่าคดีแพ่ง คดีอาญา คดีครอบครัว รวมถึงคดีเกี่ยวกับสัญญา มรดก ฟ้องหย่า ฉ้อโกง การฟ้องขับไล่ผู้เช่า และคดีอื่นๆ ตามกฎหมาย
+                    </p>
+                    <p>
+                      ให้คำปรึกษาและประเมินแนวทางคดีได้ทันที โทรหรือ LINE เพื่อนัดหมายมาปรึกษาที่สำนักงาน สำโรงเหนือ สุขุมวิท ได้เลย
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="faq-3" className="border-b border-border">
+                  <AccordionTrigger className="hover:no-underline hover:text-primary py-4">
+                    <span className="text-left font-semibold text-foreground">ค่าใช้จ่ายในการจ้างทนายคิดอย่างไร?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 space-y-3">
+                    <p className="font-medium text-foreground">
+                      ค่าจ้างขึ้นอยู่กับประเภทคดีและความซับซ้อน โดยทั่วไปคดีแพ่งเริ่มต้นประมาณ 15,000–50,000 บาท คดีอาญาหรือครอบครัวอาจสูงขึ้น
+                    </p>
+                    <p>
+                      สำนักงานให้คำปรึกษาเบื้องต้นฟรี เพื่อประเมินและเสนอราคาที่ชัดเจนตามขอบเขตงาน คุณสามารถโทรหรือ LINE เพื่อขอใบเสนอราคาได้
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="faq-4" className="border-b border-border">
+                  <AccordionTrigger className="hover:no-underline hover:text-primary py-4">
+                    <span className="text-left font-semibold text-foreground">ติดต่อเพื่อนัดหมายและรับคำปรึกษาได้อย่างไร?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 space-y-3">
+                    <p className="font-medium text-foreground">
+                      โทร 081-611-6174 หรือ LINE 0888137777 หรือมาที่สำนักงาน 1288–1291, 1702/8–9 ถนนสุขุมวิท ตำบลสำโรงเหนือ กรุงเทพฯ 10270
+                    </p>
+                    <p>
+                      นัดปรึกษาเบื้องต้นได้ฟรี เราพร้อมประเมินแนวทางคดีและเอกสารที่ต้องใช้ให้คุณทันที
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
         {/* Services Overview */}
         <section className="py-16 md:py-24 bg-muted/30">
           <div className="container">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">บริการของเรา</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">บริการทนายความกรุงเทพ</h2>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              สำนักงานของเราให้บริการด้านกฎหมายและบัญชีอย่างครบวงจร ทั้งสำหรับลูกค้าบุคคลและนิติบุคคล
+              สำนักงานกฎหมายเกรียงศักดิ์ รับว่าคดีแพ่ง คดีอาญา คดีครอบครัว ให้บริการครบวงจร
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <Card>

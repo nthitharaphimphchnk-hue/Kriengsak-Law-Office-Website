@@ -6,6 +6,8 @@
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE_TEMPLATE,
+  HOME_DESCRIPTION,
+  HOME_TITLE,
   SITE_NAME,
 } from "./seo-constants";
 
@@ -14,7 +16,7 @@ const getBaseUrl = (): string => {
   const env = (import.meta as unknown as { env?: Record<string, string> }).env;
   const url = env?.VITE_SITE_URL;
   if (url) return url.replace(/\/$/, "");
-  return "https://kriengsaklaw.manus.space";
+  return "https://www.kriengsaklawconsult.com";
 };
 
 /** Whether current env is preview/non-production (noindex if true). */
@@ -105,8 +107,8 @@ export { getBaseUrl };
  */
 export const pageMetadata = {
   home: {
-    title: pageTitle("หน้าแรก"),
-    description: DEFAULT_DESCRIPTION,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
   services: {
     title: pageTitle("บริการ"),

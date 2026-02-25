@@ -16,6 +16,10 @@ import Knowledge from "./pages/Knowledge";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Testimonials from "./pages/Testimonials";
+import LawyerChiangmaiDivorce from "./pages/LawyerChiangmaiDivorce";
+import LawyerChiangmaiFraud from "./pages/LawyerChiangmaiFraud";
+import LawyerChiangmaiEviction from "./pages/LawyerChiangmaiEviction";
+import LawyerBangkok from "./pages/LawyerBangkok";
 
 function Router() {
   // Track page views with Google Analytics and Umami
@@ -33,6 +37,10 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/testimonials"} component={Testimonials} />
+      <Route path={"/lawyer-chiangmai-divorce"} component={LawyerChiangmaiDivorce} />
+      <Route path={"/lawyer-chiangmai-fraud"} component={LawyerChiangmaiFraud} />
+      <Route path={"/lawyer-chiangmai-eviction"} component={LawyerChiangmaiEviction} />
+      <Route path={"/lawyer-bangkok"} component={LawyerBangkok} />
       <Route path={"/admin"} component={NotFound} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

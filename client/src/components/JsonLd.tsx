@@ -1,10 +1,13 @@
 /**
- * Renders JSON-LD structured data (Organization + LocalBusiness/ProfessionalService).
- * Uses VITE_SITE_URL; missing details are placeholders (TODO) or omitted.
+ * Renders JSON-LD structured data (Organization + LegalService for Local SEO).
+ * Injects into <head> for AI/AEO. Uses VITE_SITE_URL; targets ทนายความเชียงใหม่.
  */
 
+import { useEffect } from "react";
 import { ORG_LEGAL_NAME } from "@/lib/seo-constants";
 import { getBaseUrl } from "@/lib/seo";
+
+const TELEPHONE = "+66-81-611-6174";
 
 function getSiteUrl(): string {
   const env = (import.meta as unknown as { env?: Record<string, string> }).env;
@@ -13,7 +16,15 @@ function getSiteUrl(): string {
   return getBaseUrl();
 }
 
-/** Safely stringify and inject JSON-LD script (no user input in schema). */
+/** Injects JSON-LD script into document.head */
+function injectSchema(id: string, data: object) {
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = id;
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 export function JsonLd() {
   const url = getSiteUrl();
 
@@ -25,48 +36,38 @@ export function JsonLd() {
     logo: `${url}/logo.jpg`,
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "081-611-6174", // TODO: replace with env or constant if needed
-      email: "vokeingsak@hotmail.com", // TODO: replace with env if needed
+      telephone: TELEPHONE,
+      email: "vokeingsak@hotmail.com",
       contactType: "customer service",
       areaServed: "TH",
     },
   };
 
-  const localBusiness = {
+  /** LegalService schema สำหรับ Local SEO ทนายความกรุงเทพ (สำโรงเหนือ สุขุมวิท) */
+  const legalService = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: ORG_LEGAL_NAME,
-    url,
-    image: `${url}/logo.jpg`,
+    "@type": "LegalService",
+    name: "สำนักงานกฎหมายเกรียงศักดิ์",
+    image: `${url}/og.jpg`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "199 หมู่ 9 ถ. แบริ่ง 107 ต.สำโรงเหนือ อ.เมืองสมุทรปราการ",
-      addressLocality: "สมุทรปราการ",
+      streetAddress: "1288–1291, 1702/8–9 ถนนสุขุมวิท ตำบลสำโรงเหนือ",
+      addressLocality: "กรุงเทพฯ",
       postalCode: "10270",
       addressCountry: "TH",
     },
-    telephone: "081-611-6174", // TODO: sync with env/constant
-    openingHoursSpecification: undefined as undefined | { "@type": string; dayOfWeek: string[]; opens: string; closes: string },
-    areaServed: { "@type": "Country", name: "Thailand" },
+    telephone: TELEPHONE,
+    areaServed: { "@type": "City", name: "กรุงเทพฯ", addressCountry: "TH" },
   };
 
-  // Omit openingHours if not set (TODO: add when available)
-  // localBusiness.openingHoursSpecification = { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "17:00" };
+  useEffect(() => {
+    injectSchema("jsonld-organization", organization);
+    injectSchema("jsonld-legalservice", legalService);
+    return () => {
+      document.getElementById("jsonld-organization")?.remove();
+      document.getElementById("jsonld-legalservice")?.remove();
+    };
+  }, []);
 
-  const scripts = [
-    { id: "jsonld-organization", data: organization },
-    { id: "jsonld-localbusiness", data: localBusiness },
-  ];
-
-  return (
-    <>
-      {scripts.map(({ id, data }) => (
-        <script
-          key={id}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
-      ))}
-    </>
-  );
+  return null;
 }

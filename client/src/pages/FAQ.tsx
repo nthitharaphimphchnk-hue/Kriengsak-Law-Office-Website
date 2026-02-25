@@ -4,11 +4,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { updateMetaTags, pageMetadata } from "@/lib/seo";
 
-export default function FAQ() {
-  useEffect(() => {
-    updateMetaTags(pageMetadata.faq);
-  }, []);
-  const faqs = [
+const faqs = [
+    {
+      id: "faq-0",
+      question: "ฟ้องหย่าใช้เวลากี่เดือน",
+      answer: "โดยทั่วไปคดีฟ้องหย่าใช้เวลาประมาณ 6–12 เดือน ขึ้นอยู่กับความซับซ้อนของคดี",
+    },
     {
       id: "faq-1",
       question: "ต้องติดต่อสำนักงานอย่างไรเพื่อขอคำปรึกษา?",
@@ -61,8 +62,30 @@ export default function FAQ() {
     },
   ];
 
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+export default function FAQ() {
+  useEffect(() => {
+    updateMetaTags(pageMetadata.faq);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}

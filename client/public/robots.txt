@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://kriengsaklaw.manus.space/sitemap.xml
+Sitemap: https://www.kriengsaklawconsult.com/sitemap.xml
