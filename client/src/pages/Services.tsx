@@ -21,8 +21,8 @@ export default function Services() {
   const legalServices = [
     {
       icon: Scale,
-      title: "ว่าความคดีแพ่งและอาญา",
-      description: "เป็นตัวแทนในชั้นศาล ทั้งคดีแพ่ง เช่น ละเมิด, สัญญา, ที่ดิน และคดีอาญา",
+      title: "ให้คำปรึกษาและว่าความคดีแพ่งและอาญา",
+      description: "เป็นตัวแทนในชั้นศาล ทั้งคดีแพ่ง เช่น ละเมิด, สัญญา, ที่ดิน, ครอบครัว, คดีหุ้นส่วนในบริษัท และคดีอาญา เช่น คดีฟอกเงิน, คดีฉ้อโกง, ยักยอก และอื่นๆ รับทุกคดี พร้อมให้คำปรึกษา และรับว่าความคดี",
     },
     {
       icon: Briefcase,
@@ -120,7 +120,8 @@ export default function Services() {
         {/* Legal Services */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">บริการด้านกฎหมาย</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">บริการด้านกฎหมาย</h2>
+            <p className="text-muted-foreground mb-12">ให้คำปรึกษา, รับว่าความ, และจัดทำเอกสารทางกฎหมาย</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {legalServices.map((service, index) => {
                 const Icon = service.icon;

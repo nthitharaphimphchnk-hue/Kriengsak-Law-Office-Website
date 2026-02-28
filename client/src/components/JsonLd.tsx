@@ -43,7 +43,7 @@ export function JsonLd() {
     },
   };
 
-  /** LegalService schema สำหรับ Local SEO ทนายความกรุงเทพ (สำโรงเหนือ สุขุมวิท) */
+  /** LegalService schema สำหรับ Local SEO ทนายความทั่วประเทศ (สำโรงเหนือ สุขุมวิท) */
   const legalService = {
     "@context": "https://schema.org",
     "@type": "LegalService",

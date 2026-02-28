@@ -84,7 +84,7 @@ export default function Home() {
           <div className="container relative z-10">
             <div className="max-w-2xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                ทนายความกรุงเทพ ให้คำปรึกษากฎหมายโดยตรง
+                ทนายความทั่วประเทศ พร้อมให้คำปรึกษากฎหมายโดยตรง
               </h1>
               <p className="text-lg md:text-xl opacity-90 mb-4">
                 สำนักงานกฎหมายเกรียงศักดิ์ ให้บริการทนายความในกรุงเทพฯ (สำโรงเหนือ สุขุมวิท) รับว่าความคดีแพ่ง คดีอาญา คดีครอบครัว และให้คำปรึกษากฎหมายโดยตรงอย่างเป็นระบบ นัดหมายเพื่อประเมินแนวทางคดีและเอกสารที่ต้องใช้ได้ทันที
@@ -126,7 +126,7 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-white">
           <div className="container">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              ทนายความกรุงเทพ ที่ลูกค้าไว้วางใจ
+              ทนายความทั่วประเทศ ที่ลูกค้าไว้วางใจ
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="border-l-4 border-l-primary">
@@ -171,14 +171,14 @@ export default function Home() {
           <div className="container">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">บริการหลักของเรา</h2>
             <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
-              ทนายความกรุงเทพ ที่สำนักงานกฎหมายเกรียงศักดิ์ พร้อมให้คำปรึกษาและรับว่าความคดีแพ่ง อาญา ครอบครัว
+              ทนายความทั่วประเทศ ที่สำนักงานกฎหมายเกรียงศักดิ์ พร้อมให้คำปรึกษาและรับว่าความคดีแพ่ง อาญา ครอบครัว
             </p>
             <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 list-none">
               <li>
                 <Link href="/lawyer-bangkok">
                   <a>
                     <Button variant="outline" className="w-full sm:w-auto">
-                      ทนายความกรุงเทพ
+                      ทนายความทั่วประเทศ
                     </Button>
                   </a>
                 </Link>
@@ -282,7 +282,7 @@ export default function Home() {
         {/* Services Overview */}
         <section className="py-16 md:py-24 bg-muted/30">
           <div className="container">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">บริการทนายความกรุงเทพ</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">บริการทนายความทั่วประเทศ</h2>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
               สำนักงานกฎหมายเกรียงศักดิ์ รับว่าคดีแพ่ง คดีอาญา คดีครอบครัว ให้บริการครบวงจร
             </p>

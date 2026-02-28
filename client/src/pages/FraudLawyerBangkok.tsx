@@ -9,9 +9,9 @@ import { ArrowRight } from "lucide-react";
 import { DISCLAIMER_TEXT } from "@/lib/seo-constants";
 
 const PAGE_META = {
-  title: "คดีฉ้อโกงในกรุงเทพ มีโทษกี่ปี | ทนายความกรุงเทพ",
+  title: "คดีฉ้อโกงในกรุงเทพ มีโทษกี่ปี | ทนายความทั่วประเทศ",
   description:
-    "คดีฉ้อโกงมีโทษจำคุกไม่เกิน 5 ปี หรือปรับไม่เกิน 100,000 บาท ตาม ป.อาญา มาตรา 341 ทนายความกรุงเทพ ให้คำปรึกษาคดีฉ้อโกง",
+    "คดีฉ้อโกงมีโทษจำคุกไม่เกิน 5 ปี หรือปรับไม่เกิน 100,000 บาท ตาม ป.อาญา มาตรา 341 ทนายความทั่วประเทศ ให้คำปรึกษาคดีฉ้อโกง",
 };
 
 const faqs = [
@@ -117,7 +117,7 @@ export default function FraudLawyerBangkok() {
             <Link href="/contact">
               <a>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  ปรึกษาทนายความกรุงเทพ
+                  ปรึกษาทนายความทั่วประเทศ
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>

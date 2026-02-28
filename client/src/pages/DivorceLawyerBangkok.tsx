@@ -9,9 +9,9 @@ import { ArrowRight } from "lucide-react";
 import { DISCLAIMER_TEXT } from "@/lib/seo-constants";
 
 const PAGE_META = {
-  title: "ฟ้องหย่ากรุงเทพ ต้องทำอย่างไร ใช้เวลากี่เดือน | ทนายความกรุงเทพ",
+  title: "ฟ้องหย่ากรุงเทพ ต้องทำอย่างไร ใช้เวลากี่เดือน | ทนายความทั่วประเทศ",
   description:
-    "คดีฟ้องหย่าในกรุงเทพโดยทั่วไปใช้เวลาประมาณ 6–12 เดือน ทนายความกรุงเทพ ให้คำปรึกษาคดีหย่า ฟ้องหย่า",
+    "คดีฟ้องหย่าในกรุงเทพโดยทั่วไปใช้เวลาประมาณ 6–12 เดือน ทนายความทั่วประเทศ ให้คำปรึกษาคดีหย่า ฟ้องหย่า",
 };
 
 const faqs = [
@@ -93,7 +93,7 @@ export default function DivorceLawyerBangkok() {
 
             <h2 className="text-2xl font-bold mb-4">ค่าใช้จ่ายโดยประมาณ</h2>
             <p className="text-muted-foreground mb-8">
-              ค่าธรรมเนียมศาลและค่าทนายความขึ้นอยู่กับความซับซ้อน โดยทั่วไปคดีหย่าที่ไม่ซับซ้อน เริ่มต้นประมาณ 20,000–50,000 บาท ติดต่อทนายความกรุงเทพเพื่อขอประเมินราคา
+              ค่าธรรมเนียมศาลและค่าทนายความขึ้นอยู่กับความซับซ้อน โดยทั่วไปคดีหย่าที่ไม่ซับซ้อน เริ่มต้นประมาณ 20,000–50,000 บาท ติดต่อทนายความทั่วประเทศเพื่อขอประเมินราคา
             </p>
 
             <div className="bg-muted/50 rounded-lg p-6 mb-12">
@@ -117,7 +117,7 @@ export default function DivorceLawyerBangkok() {
             <Link href="/contact">
               <a>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  ปรึกษาทนายความกรุงเทพ
+                  ปรึกษาทนายความทั่วประเทศ
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>

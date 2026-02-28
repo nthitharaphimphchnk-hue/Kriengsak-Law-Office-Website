@@ -96,7 +96,7 @@ export default function Footer() {
             <div className="flex gap-2 text-sm">
               <MapPin size={16} className="flex-shrink-0 mt-0.5" />
               <p className="opacity-90">
-                199 หมู่ 9 ถ. แบริ่ง 107 ต.สำโรงเหนือ อ.เมืองสมุทรปราการ จ.สมุทรปราการ 10270
+                199 หมู่ 9 ถนนสุขุมวิท 107 (ซอยแบริ่ง 35-37) ตำบลสำโรงเหนือ อำเภอเมืองสมุทรปราการ จังหวัดสมุทรปราการ 10270, Samut Prakan, Thailand
               </p>
             </div>
           </div>

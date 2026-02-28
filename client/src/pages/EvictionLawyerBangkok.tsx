@@ -9,9 +9,9 @@ import { ArrowRight } from "lucide-react";
 import { DISCLAIMER_TEXT } from "@/lib/seo-constants";
 
 const PAGE_META = {
-  title: "ฟ้องขับไล่ผู้เช่ากรุงเทพ ต้องทำอย่างไร | ทนายความกรุงเทพ",
+  title: "ฟ้องขับไล่ผู้เช่ากรุงเทพ ต้องทำอย่างไร | ทนายความทั่วประเทศ",
   description:
-    "การฟ้องขับไล่ผู้เช่าในกรุงเทพต้องยื่นคำฟ้องต่อศาลเมื่อผู้เช่าผิดสัญญา ทนายความกรุงเทพ ให้คำปรึกษาคดีเช่าอสังหาริมทรัพย์",
+    "การฟ้องขับไล่ผู้เช่าในกรุงเทพต้องยื่นคำฟ้องต่อศาลเมื่อผู้เช่าผิดสัญญา ทนายความทั่วประเทศ ให้คำปรึกษาคดีเช่าอสังหาริมทรัพย์",
 };
 
 const faqs = [
@@ -90,7 +90,7 @@ export default function EvictionLawyerBangkok() {
 
             <h2 className="text-2xl font-bold mb-4">ค่าใช้จ่าย</h2>
             <p className="text-muted-foreground mb-8">
-              ค่าธรรมเนียมศาลและค่าทนายความขึ้นอยู่กับความซับซ้อน โดยทั่วไปเริ่มต้นประมาณ 15,000–40,000 บาท ติดต่อทนายความกรุงเทพเพื่อขอประเมินราคา
+              ค่าธรรมเนียมศาลและค่าทนายความขึ้นอยู่กับความซับซ้อน โดยทั่วไปเริ่มต้นประมาณ 15,000–40,000 บาท ติดต่อทนายความทั่วประเทศเพื่อขอประเมินราคา
             </p>
 
             <div className="bg-muted/50 rounded-lg p-6 mb-12">
@@ -114,7 +114,7 @@ export default function EvictionLawyerBangkok() {
             <Link href="/contact">
               <a>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  ปรึกษาทนายความกรุงเทพ
+                  ปรึกษาทนายความทั่วประเทศ
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
