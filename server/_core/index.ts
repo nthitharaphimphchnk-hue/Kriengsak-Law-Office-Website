@@ -1,5 +1,7 @@
 import "dotenv/config";
 import express from "express";
+import fs from "fs";
+import path from "path";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -7,6 +9,8 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+
+const ROOT = path.resolve(import.meta.dirname, "../..");
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -43,6 +47,27 @@ async function startServer() {
       createContext,
     })
   );
+  // robots.txt and sitemap.xml – serve before SPA catch-all (dev + prod)
+  const publicDir =
+    process.env.NODE_ENV === "development"
+      ? path.join(ROOT, "client", "public")
+      : path.join(ROOT, "dist", "public");
+  app.get("/robots.txt", (_req, res) => {
+    const p = path.join(publicDir, "robots.txt");
+    if (fs.existsSync(p)) {
+      res.type("text/plain").sendFile(p);
+    } else {
+      res.type("text/plain").status(200).send("User-agent: *\nAllow: /\n\nSitemap: https://kriengsaklawconsult.com/sitemap.xml");
+    }
+  });
+  app.get("/sitemap.xml", (_req, res) => {
+    const p = path.join(publicDir, "sitemap.xml");
+    if (fs.existsSync(p)) {
+      res.type("application/xml").sendFile(p);
+    } else {
+      res.status(404).end();
+    }
+  });
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);

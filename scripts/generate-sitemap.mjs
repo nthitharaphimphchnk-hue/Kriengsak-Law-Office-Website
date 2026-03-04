@@ -19,7 +19,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const SITEMAP_PATH = join(ROOT, "client", "public", "sitemap.xml");
 
-const BASE_URL = (process.env.VITE_SITE_URL || "https://www.kriengsaklawconsult.com").replace(/\/$/, "");
+const BASE_URL = (process.env.VITE_SITE_URL || "https://kriengsaklawconsult.com").replace(/\/$/, "");
 
 const ROUTES = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
@@ -31,7 +31,6 @@ const ROUTES = [
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
   { path: "/knowledge", changefreq: "weekly", priority: "0.8" },
   { path: "/faq", changefreq: "monthly", priority: "0.6" },
-  { path: "/testimonials", changefreq: "monthly", priority: "0.6" },
   { path: "/lawyer-chiangmai-divorce", changefreq: "monthly", priority: "0.8" },
   { path: "/lawyer-chiangmai-fraud", changefreq: "monthly", priority: "0.8" },
   { path: "/lawyer-bangkok", changefreq: "monthly", priority: "0.9" },

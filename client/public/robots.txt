@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
 
-Sitemap: https://www.kriengsaklawconsult.com/sitemap.xml
+Sitemap: https://kriengsaklawconsult.com/sitemap.xml
